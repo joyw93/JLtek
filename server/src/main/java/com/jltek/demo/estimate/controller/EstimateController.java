@@ -15,7 +15,7 @@ public class EstimateController {
 
     @PostMapping()
     public ResponseEntity<String> getExample() {
-        String response = "docker test 2";
+        String response = "docker test 3";
         return ResponseEntity.ok(response);
     }
 }
