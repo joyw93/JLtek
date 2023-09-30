@@ -46,4 +46,5 @@ jobs:
         key: ${{ secrets.EC2_KEY }}
         envs: GITHUB_SHA
         script: |
+               docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
                sudo docker pull ${{ secrets.DOCKER_REPO }}
