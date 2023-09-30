@@ -45,4 +45,5 @@ jobs:
         username: ubuntu
         key: ${{ secrets.EC2_KEY }}
         envs: GITHUB_SHA
-        
+        script: |
+                ls
