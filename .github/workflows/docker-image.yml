@@ -47,3 +47,4 @@ jobs:
         envs: GITHUB_SHA
         script: |
                 ls
+                cat ~/.ssh/id_rsa
