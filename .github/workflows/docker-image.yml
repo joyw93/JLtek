@@ -48,4 +48,4 @@ jobs:
         script: |
                docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
                sudo docker pull ${{ secrets.DOCKER_REPO }}:latest
-               docker rmi $(docker images -f "dangling=true" -q)
+               sudo docker rmi $(docker images -f "dangling=true" -q)
