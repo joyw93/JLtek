@@ -34,8 +34,8 @@ jobs:
       run: |
             cd ./server
             docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-            docker build -f Dockerfile -t ${{ secrets.DOCKER_REPO }} .
-            docker push ${{ secrets.DOCKER_REPO }}
+            docker build -f Dockerfile -t ${{ secrets.DOCKER_REPO }}/jltek-server .
+            docker push ${{ secrets.DOCKER_REPO }}/jltek-server
           
     - name: Deploy to server
       uses: appleboy/ssh-action@master
@@ -47,6 +47,6 @@ jobs:
         envs: GITHUB_SHA
         script: |
                docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-               sudo docker pull ${{ secrets.DOCKER_REPO }}:latest
+               sudo docker pull ${{ secrets.DOCKER_REPO }}/jltek-server:latest
                sudo docker rmi $(sudo docker images -f "dangling=true" -q) || true
                sudo docker-compose up -d
