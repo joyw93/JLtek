@@ -1,1 +1,41 @@
+name: Client Docker Image CI
 
+on:
+  push:
+    branches: [ "client" ]
+  pull_request:
+    branches: [ "client" ]
+
+permissions:
+   contents: read
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+  
+
+    - name: Docker build & push to docker repo
+      run: |
+            cd ./server
+            docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+            docker build -f Dockerfile -t ${{ secrets.DOCKER_REPO }}/jltek-client .
+            docker push ${{ secrets.DOCKER_REPO }}/jltek-client
+          
+    - name: Deploy to server
+      uses: appleboy/ssh-action@master
+      id: deploy
+      with:
+        host: ${{ secrets.EC2_HOST }}
+        username: ubuntu
+        key: ${{ secrets.EC2_KEY }}
+        envs: GITHUB_SHA
+        script: |
+               docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+               sudo docker pull ${{ secrets.DOCKER_REPO }}/jltek-client:latest
+               sudo docker rmi $(sudo docker images -f "dangling=true" -q) || true
+               sudo docker-compose up -d
