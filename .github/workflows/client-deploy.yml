@@ -17,14 +17,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-
-    - name: Create .env file
-      run: |
-          echo "VITE_API_KEY=${{ secrets.VITE_API_KEY }}" > .env
-
+          
     - name: Docker build & push to docker repo
       run: |
             cd ./client
+            echo "VITE_API_KEY=${{ secrets.VITE_API_KEY }}" > .env
             docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
             docker build -f Dockerfile -t ${{ secrets.DOCKER_REPO }}/jltek-client .
             docker push ${{ secrets.DOCKER_REPO }}/jltek-client
