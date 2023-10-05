@@ -2,9 +2,9 @@ name: Client Docker Image CI
 
 on:
   push:
-    branches: [ "client" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "client" ]
+    branches: [ "main" ]
 
 permissions:
    contents: read
