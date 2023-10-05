@@ -24,7 +24,7 @@ jobs:
 
     - name: Docker build & push to docker repo
       run: |
-            cd ./server
+            cd ./client
             docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
             docker build -f Dockerfile -t ${{ secrets.DOCKER_REPO }}/jltek-client .
             docker push ${{ secrets.DOCKER_REPO }}/jltek-client
