@@ -17,7 +17,8 @@ public class CorsConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/api/**") // 허용할 엔드포인트 패턴을 지정합니다.
                 .allowedOrigins(allowedOrigin) // 허용할 오리진을 지정합니다.
-                .allowedMethods("GET", "POST", "PUT", "DELETE"); // 허용할 HTTP 메서드를 지정합니다.
+                .allowedMethods("GET", "POST", "PUT", "DELETE") // 허용할 HTTP 메서드를 지정합니다.
+                .allowCredentials(true);
     }
 }
 
