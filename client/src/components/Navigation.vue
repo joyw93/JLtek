@@ -16,7 +16,6 @@
 import { ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 const tab = ref('')
-const items = ['회사소개', '견적문의']
 const router = useRouter()
 const onClick = (route) => {
   router.push(route)
@@ -25,7 +24,7 @@ const onClick = (route) => {
 <style>
 .banner {
   width: 100%;
-  height: 100vh;
+  height: 50vh;
   background-size: 100% 100%;
   background-image: url('../assets/images/banner3.jpg');
 }
@@ -54,5 +53,4 @@ const onClick = (route) => {
 .v-btn__content {
   font-size: 1.3rem;
 }
-
 </style>

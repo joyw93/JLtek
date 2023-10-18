@@ -1,11 +1,12 @@
 // estimateService.js
+import type { Estimate } from '@/entity/Estimate'
 import axios from 'axios'
 
 const API_URL = import.meta.env.VITE_API_ENDPOINT // 실제 API 엔드포인트를 사용하세요
 
-export async function postEstimate(post: any) {
+export async function postEstimate(estimate: Estimate) {
   try {
-    console.log(post)
+    console.log(estimate)
     console.log(API_URL)
     const result = await axios.post(`${API_URL}/api/v1/estimate`, null)
     alert(result.data)
