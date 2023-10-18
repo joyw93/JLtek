@@ -1,26 +1,33 @@
 package com.jltek.demo.estimate.controller;
 
+import com.jltek.demo.common.response.ApiResponse;
+import com.jltek.demo.common.response.ApiResponseMessage;
+import com.jltek.demo.estimate.dto.EstimateRequestDto;
+import com.jltek.demo.estimate.dto.EstimateResponseDto;
 import com.jltek.demo.estimate.service.EstimateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "/api/v1/estimate")
 public class EstimateController {
 
-    @Value("${cors.allowed-origin}")
-    private String allowedOrigin;
     private final EstimateService estimateService;
 
+    @GetMapping()
+    public ResponseEntity<ApiResponse> getAllEstimates() {
+//        ArrayList<EstimateResponseDto> estimates = estimateService.
+        return null;
+    }
+
     @PostMapping()
-    public ResponseEntity<String> getExample() {
-        System.out.println(allowedOrigin);
-        String response = "docker test 5";
-        return ResponseEntity.ok(response);
+    public ResponseEntity<ApiResponse> postEstimate(@RequestBody EstimateRequestDto estimateRequestDto) {
+        Long estimateId = estimateService.postEstimate(estimateRequestDto);
+        return ResponseEntity.ok(ApiResponse.success(ApiResponseMessage.POST_SUCCESS, estimateId));
     }
 }
