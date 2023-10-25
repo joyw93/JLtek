@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import java.util.List;
 import java.util.ArrayList;
 
 @RequiredArgsConstructor
@@ -21,8 +21,8 @@ public class EstimateController {
 
     @GetMapping()
     public ResponseEntity<ApiResponse> getAllEstimates() {
-//        ArrayList<EstimateResponseDto> estimates = estimateService.
-        return null;
+        List<EstimateResponseDto> estimates = estimateService.getAllEstimates();
+        return ResponseEntity.ok(ApiResponse.success(ApiResponseMessage.GET_SUCCESS, estimates));
     }
 
     @PostMapping()
