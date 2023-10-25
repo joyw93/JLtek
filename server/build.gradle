@@ -2,7 +2,6 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.1.3'
 	id 'io.spring.dependency-management' version '1.1.3'
-	id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
 }
 
 group = 'com.jltek.demo'
@@ -37,23 +36,23 @@ dependencies {
 	testImplementation 'org.springframework.security:spring-security-test'
 }
 
-def querydslDir = "src/main/generated"
-
-querydsl {
-	jpa = true
-	querydslSourcesDir = querydslDir
-}
-
-sourceSets {
-	main.java.srcDir querydslDir
-}
-
-configurations {
-	querydsl.extendsFrom compileClasspath
-}
-
-tasks.compileQuerydsl.dependsOn(clean);
-
-compileQuerydsl{
-	options.annotationProcessorPath = configurations.querydsl
-}
+//def querydslDir = "src/main/generated"
+//
+//querydsl {
+//	jpa = true
+//	querydslSourcesDir = querydslDir
+//}
+//
+//sourceSets {
+//	main.java.srcDir querydslDir
+//}
+//
+//configurations {
+//	querydsl.extendsFrom compileClasspath
+//}
+//
+//tasks.compileQuerydsl.dependsOn(clean);
+//
+//compileQuerydsl{
+//	options.annotationProcessorPath = configurations.querydsl
+//}
